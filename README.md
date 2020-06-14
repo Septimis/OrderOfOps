@@ -1,0 +1,1 @@
+A program that takes an algebraic expression as an input, tests if the expression is a valid input and then spits out an answer

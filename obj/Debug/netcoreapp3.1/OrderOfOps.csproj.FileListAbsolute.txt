@@ -1,0 +1,13 @@
+C:\Programming\Personal Projects\OrderOfOps\bin\Debug\netcoreapp3.1\OrderOfOps.exe
+C:\Programming\Personal Projects\OrderOfOps\bin\Debug\netcoreapp3.1\OrderOfOps.deps.json
+C:\Programming\Personal Projects\OrderOfOps\bin\Debug\netcoreapp3.1\OrderOfOps.runtimeconfig.json
+C:\Programming\Personal Projects\OrderOfOps\bin\Debug\netcoreapp3.1\OrderOfOps.runtimeconfig.dev.json
+C:\Programming\Personal Projects\OrderOfOps\bin\Debug\netcoreapp3.1\OrderOfOps.dll
+C:\Programming\Personal Projects\OrderOfOps\bin\Debug\netcoreapp3.1\OrderOfOps.pdb
+C:\Programming\Personal Projects\OrderOfOps\obj\Debug\netcoreapp3.1\OrderOfOps.csprojAssemblyReference.cache
+C:\Programming\Personal Projects\OrderOfOps\obj\Debug\netcoreapp3.1\OrderOfOps.csproj.CoreCompileInputs.cache
+C:\Programming\Personal Projects\OrderOfOps\obj\Debug\netcoreapp3.1\OrderOfOps.AssemblyInfoInputs.cache
+C:\Programming\Personal Projects\OrderOfOps\obj\Debug\netcoreapp3.1\OrderOfOps.AssemblyInfo.cs
+C:\Programming\Personal Projects\OrderOfOps\obj\Debug\netcoreapp3.1\OrderOfOps.dll
+C:\Programming\Personal Projects\OrderOfOps\obj\Debug\netcoreapp3.1\OrderOfOps.pdb
+C:\Programming\Personal Projects\OrderOfOps\obj\Debug\netcoreapp3.1\OrderOfOps.genruntimeconfig.cache
