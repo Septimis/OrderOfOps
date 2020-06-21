@@ -14,10 +14,11 @@ namespace OrderOfOps
             string errMessage = "";
             bool allGucci = true; 
             bool repeat = false;
-            char[] operators = {'*', '/', '+', '-', '%'};
+            char[] operators = {'*', '/', '+', '-', '%', '^'};
             int numUnclosedParenthesis = 0;
             int numUnclosedBrackets = 0;
             Stack<string> stack = new Stack<string>();
+            Stack<double> operandStack = new Stack<double>();
             Stack<string> operatorStack = new Stack<string>();
 
             //Intro
@@ -65,6 +66,16 @@ namespace OrderOfOps
                             algExpression = algExpression.Insert(i+1, "*");
                         }
 
+                        //if the expression implies '0.4', but instead puts '.4'
+                        if(i+1 < algExpression.Length && Convert.ToInt32(algExpression[i]) == 46) {
+                            foreach(char op in operators) 
+                            {
+                                if(algExpression[i-1] == op) {
+                                    algExpression = algExpression.Insert(i, "0");
+                                }
+                            }
+                        }
+
                         //checks if there are equal number of open parenthesis as closing
                         if(algExpression[i] == '(') {
                             numUnclosedParenthesis++;
@@ -85,7 +96,7 @@ namespace OrderOfOps
                         //checks if there are two operators next to each other
                         for(int j = 0; j < operators.Length; j++)
                         {
-                            if(algExpression[i] == operators[j] || algExpression[i] == '(' || algExpression[i] == '^') {
+                            if(algExpression[i] == operators[j] || algExpression[i] == '(') {
                                 for(int g = 0; g < operators.Length; g++)
                                 {
                                     if(!allGucci)
@@ -130,6 +141,24 @@ namespace OrderOfOps
                     }
                 }
 
+                //checks if a period is displayed twice in the same number
+                foreach(string i in infixExpression)
+                {
+                    if(Convert.ToInt32(i[0]) >= 48 && Convert.ToInt32(i[0]) <= 57) {
+                        int periodCount = 0;
+                        foreach(char j in i)
+                        {
+                            if(j == '.') {
+                                periodCount++;
+                            }
+                            if(periodCount > 1) {
+                                allGucci = false;
+                                errMessage += "You had more than one decimal point in the number " + i;
+                            }
+                        }
+                    }
+                }
+
                 //Checks if there are any errors that occurred in the code and spits out the error
                 if(!allGucci) {
                     errorMessage(errMessage); //invoke the errorMessage function
@@ -140,6 +169,7 @@ namespace OrderOfOps
                     numUnclosedBrackets = 0;
                     repeat = true;
                     allGucci = true;
+                    infixExpression.Clear();
                 } else { //if everything is good to go, start solving the problem
                     repeat = false;
                 }
@@ -180,12 +210,46 @@ namespace OrderOfOps
             //Solve the postfix expression
             foreach(string i in postfixExpression)
             {
+                double operandOne;
+                double operandTwo;
+                string operatorStr = "";
+                double result = 0;
                 if(Convert.ToInt32(i[0]) >= 48 && Convert.ToInt32(i[0]) <= 57) { //if the current character is 0-9, add it to the stack containing operands
-                    stack.Push(i);
+                    operandStack.Push(Convert.ToDouble(i));
                 } else { //if the current character is an operator, pop operands from the stack.  Evaluate and push the result back to the stack
-                    
+                    operatorStack.Push(i);
+                    if(operandStack.Count > 1) {
+                        operandTwo = operandStack.Pop();
+                        operandOne = operandStack.Pop();
+                        operatorStr = operatorStack.Pop();
+
+                        switch(operatorStr) {
+                            case "+": 
+                                result = operandOne + operandTwo;
+                                break;
+                            case "-":
+                                result = operandOne - operandTwo;
+                                break;
+                            case "*":
+                                result = operandOne * operandTwo;
+                                break;
+                            case "/":
+                                result = operandOne / operandTwo;
+                                break;
+                            case "%":
+                                result = operandOne % operandTwo;
+                                break;
+                            case "^":
+                                result = Math.Pow(operandOne, operandTwo);
+                                break;
+                        }
+                        operandStack.Push(result);
+                    }
                 }
             }
+
+            Console.WriteLine("\n\n***FINAL RESULT***");
+            Console.WriteLine(algExpression + " = " + operandStack.Pop());
         }
 
         private static int prescedence(string l_char) //A function to test the prescedence (or weight) of an operator
