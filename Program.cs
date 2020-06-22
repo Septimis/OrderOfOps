@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*  ORDER OF OPS PROGRAM
+ *  BY:                    CONNOR MEADS
+ *  FOCUS:                 THIS PROGRAM WAS CREATED AS A WAY TO PRACTICE INFIX TO POSTFIX, AND FROM POSTFIX TO RESOLUTION
+ *  DESCRIPTION:           THE PROGRAM ACCEPTS A STRING AND TEST IT FOR BEING A VALID ALGEBRAIC EXPRESSION, THEN IT CONVERTS THE INFIX EXPRESSION TO A POSTFIX EXPRESSION.  FINALLY, IT RESOLVES THE POSTFIX EXPRESSION TO GIVE YOU A RESULT.
+ *  SPECIAL THANKS:        KEN MEADS FOR CHALLENGING ME WITH THE IDEA AND TESTING MY PROGRAM
+ *  QUESTIONS & COPMMENTS: PLEASE EMAIL ME AT 'CONNOR.MEADS@PROTONMAIL.COM'
+ *
+ * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ *
+ *  GUIDE:
+ *  VOID MAIN(): TEST FOR VALID EXPRESSION, CONVERT FROM INFIX TO POSTFIX, RESOLVE POSTFIX EXPRESSION
+ *  INT PRESCEDENCE(STRING L_CHAR): RETURNS AN INTEGER ON THE PRESCEDENCE OF AN OPERATOR, WITH '+' & '-' BEING HEAVIER, '*' & '/' BEING LIGHTER, AND '^' BEING THE LIGHTEST
+ *  VOID ERRORMESSAGE(STRING L_ERRMSG): PRINTS OUT ANY ERRORS ENCOUNTERED WHILE TESTING THE INPUTTED STRING TO BE AN ALGEBRAIC EXPRESSION
+ */
+
+using System;
 using System.Collections.Generic;
 
 namespace OrderOfOps
@@ -70,8 +85,9 @@ namespace OrderOfOps
                         if(i+1 < algExpression.Length && Convert.ToInt32(algExpression[i]) == 46) {
                             foreach(char op in operators) 
                             {
-                                if(algExpression[i-1] == op) {
+                                if(algExpression[i-1] == op || algExpression[i-1] == '(') {
                                     algExpression = algExpression.Insert(i, "0");
+                                    break;
                                 }
                             }
                         }
@@ -261,6 +277,7 @@ namespace OrderOfOps
                     return 1; //heaviest
                 case "/":
                 case "*":
+                case "%":
                     return 2;
                 case "^":
                     return 3; //lightest
